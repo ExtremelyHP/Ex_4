@@ -10,6 +10,67 @@
 				margin: 0;
 				text-decoration: none;
 			}
+			html{
+				font-size: 62.5%;
+			}
+			.container {
+			    display: flex;
+			    flex-direction: row; /* 横向排列 */
+			    position: absolute; /* 绝对定位 */
+			    left: 0; /* 紧贴屏幕左边 */
+			    top: 40%; /* 垂直居中 */
+			    transform: translateY(-50%); /* 垂直居中 */
+			}
+			img{
+				background-color: #666;
+				height: 40rem;
+				width: 6rem;
+				margin: 1rem;
+				border-radius: 20rem;
+				object-fit: cover;
+				user-select: none;
+				--expand-width:35rem;
+				--shrink-width:5rem;
+				--expand-radius:3.6rem;
+				--shrink-radius:20rem;
+			}
+			a:nth-child(1) img{
+				animation: swiper 30s infinite;
+			}
+			a:nth-child(2) img{
+				animation: swiper 30s 6s infinite;
+			}
+			a:nth-child(3) img{
+				animation: swiper 30s 12s infinite;
+			}
+			a:nth-child(4) img{
+				animation: swiper 30s 18s infinite;
+			}
+			a:nth-child(5) img{
+				animation: swiper 30s 24s infinite;
+			}
+			@keyframes swiper {
+				0%{
+					width: var(--shrink-width);
+					border-radius: var(--shrink-radius);
+				}
+				1%{
+					width: var(--expand-width);
+					border-radius: var(--expand-radius);
+				}
+				20%{
+					width: var(--expand-width);
+					border-radius: var(--expand-radius);
+				}
+				21%{
+					width: var(--shrink-width);
+					border-radius: var(--shrink-radius);
+				}
+				100%{
+					width: var(--shrink-width);
+					border-radius: var(--shrink-radius);
+				}
+			}
 			body{
 				background-image: url("img/BM_blackground.jpg");
 				background-repeat: no-repeat;
@@ -18,13 +79,8 @@
 				justify-content: center;/* 子元素在主轴方向上的对齐方式为底部对齐 */
 				align-items: center;/* 子元素在交叉轴方向上的对齐方式为居中对齐 */
 				min-height: 100vh; /* 最小高度为视口高度，确保底部对齐 */
-				/*background-attachment: fixed;*/
-				
-				
 			}
-
-			ul.slides{
-
+/* 			ul.slides{
 				top: 150px; /* 距离顶部0 */
 				left: 20px; /* 距离左边0 */
 				position: absolute;
@@ -34,12 +90,9 @@
 				margin: 0;
 				padding: 0;
 				background-color: aliceblue;
-				overflow: hidden;
-				
-			}
-			li.slide{
-				
-				
+				overflow: hidden;	
+			} */
+/* 			li.slide{
 				margin: 0;
 				padding: 0;
 				width: inherit;
@@ -54,25 +107,19 @@
 				font-size: 80px;
 				color: white;
 				transition: .5s transform ease-in-out;
-			}
-			input[type="radio"]{
-				
-				
+			} */
+/* 			input[type="radio"]{
 				position: relative;
 				z-index: 100;
 				display: none;
-			}
-			.controls-visible{
-				
-				
+			} */
+/* 			.controls-visible{
 				position: absolute;
 				width: 100%;
 				bottom: 10px;
 				text-align: center;
-			}
-			.controls-visible label{
-				
-				
+			} */
+/* 			.controls-visible label{
 				display: inline-block;
 				width: 10px;
 				height: 10px;
@@ -80,56 +127,42 @@
 				border-radius: 50%;
 				margin: 0px 3px;
 				border: 2px solid white;
-			}
-			.slide:nth-of-type(1){
-				
-				
-				
+			} */
+/* 			.slide:nth-of-type(1){
 				background-image: url("img/blackmyth_wukong_wallpaper_019.jpg");
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
 			.slide:nth-of-type(2){
-				
 				background-image: url("img/blackmyth_wukong_wallpaper_034.jpg");
 				background-repeat: no-repeat;
 				background-size: cover;
 				left: 100%;
 			}
-			
 			.slide:nth-of-type(3){
-				
 				background-image: url("img/blackmyth_wukong_wallpaper_035.jpg");
 				background-repeat: no-repeat;
 				background-size: cover;
 				left: 200%;
-			}
-			
+			} */
 			.slides input[type='radio']:nth-of-type(1):checked ~ .controls-visible label:nth-of-type(1){
-				background-color: darkgray;
-				
+				background-color: darkgray;	
 			}
-			
 			.slides input[type='radio']:nth-of-type(2):checked ~ .controls-visible label:nth-of-type(2){
 				background-color: darkgray;
 			}
-			
 			.slides input[type='radio']:nth-of-type(3):checked ~ .controls-visible label:nth-of-type(3){
 				background-color: darkgray;
 			}
-			
 			.slides input[type="radio"]:nth-of-type(1):checked ~ .slide{
 				transform: translatex(0%);
 			}
-			
 			.slides input[type="radio"]:nth-of-type(2):checked ~ .slide{
 				transform: translatex(-100%);
 			}
-			
 			.slides input[type="radio"]:nth-of-type(3):checked ~ .slide{
 				transform: translatex(-200%);
 			}
-			
 			.bottom-centered {
 			    display: flex;
 			    justify-content: center; 
@@ -155,12 +188,6 @@
 				line-height: 88px;
 				box-shadow: 6px 0px 0px #00E6F6;
 				outline: transparent;
-				/*background-color: gray;
-				border: 1px solid black;
-				cursor: pointer;
-				z-index: 1;
-				border-radius: 10px;
-				margin-bottom: 20px;*/
 			}
 			button::after{
 				--slice-0:inset(50% 50% 50% 50%);
@@ -169,8 +196,6 @@
 				--slice-3:inset(10% -6px 85% 0);
 				--slice-4:inset(40% -6px 43% 0);
 				--slice-5:inset(80% -6px 5% 0);
-				
-				
 				content: 'Start Now';
 				display: block;
 				position: absolute;
@@ -181,15 +206,11 @@
 				 background: linear-gradient(45deg, yellow 3%, #00E6F6 3%,#00E6F6 5% ,red 5%);
 				 text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
 				 clip-path: var(--slice-0);
-				 
 			}
-			
 			button:hover::after{
 				animation: 1s glitch;
 				animation-timing-function: steps(2, end);
 			}
-			
-			
 			@keyframes glitch{
 				0% {
 				    clip-path: var(--slice-1);
@@ -236,8 +257,7 @@
 				    transform: translate(0);
 				  }
 			}
-			
-			.nav{
+/* 			.nav{
 				width: 100%;
 				height: 56px;
 				position: fixed;
@@ -303,39 +323,19 @@
 			.nav ul li:nth-child(7):hover~.nav-box{
 				left: calc(100% / 7 *6);
 				background-color: red;
-			}
-			/*button:hover .after,button:hover .before{
-				width: 51%;
-			}
-			button:hover{
-				color: white;
-				transition: all 1s ease;
-			}
-			.before{
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 2px;
-				height: 100%;	
-				background-color: black;
-				transition: all 0.5s;
-				z-index: -1;
-			}
-			.after{
-				position: absolute;
-				top: 0;
-				right: 0;
-				width: 2px;
-				height: 100%;
-				background-color: black;
-				transition: all 0.5s;
-				z-index: -1;
-			}
-			*/
+			} */
 		</style>
 	</head>
 	<body>
-		<ul class="slides">
+		<div class="container">
+			
+			<a href="#"><img src="./img/bizhi1.jpg" alt=""></a>
+			<a href="#"><img src="./img/bizhi2.jpg" alt=""></a>
+			<a href="#"><img src="./img/bizhi3.jpg" alt=""></a>
+			<a href="#"><img src="./img/bizhi4.jpg" alt=""></a>
+			<a href="#"><img src="./img/wukong.jpg" alt=""></a>
+		</div>
+<!-- 		<ul class="slides">
 			<input type="radio" id="control-1" name="control" checked>
 			<input type="radio" id="control-2" name="control">
 			<input type="radio" id="control-3" name="control">
@@ -348,8 +348,8 @@
 				<label for="control-2"></label>
 				<label for="control-3"></label>
 			</div>
-			</ul>
-		<div class="nav">	
+			</ul> -->
+<!-- 		<div class="nav">	
 			<ul>
 				<li><a herf="#">首页</a></li>
 				<li><a herf="#">黑风山</a></li>
@@ -360,7 +360,7 @@
 				<li><a herf="#">花果山</a></li>
 				<div class="nav-box"></div>
 			</ul>
-		</div>
+		</div> -->
 		<div class="bottom-centered">
 			<link rel="preconnect" href="https://fonts.gstatic.com"> 
 			<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -374,3 +374,4 @@
 		    </div>
 	</body>
 </html>
+
