@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: url(wukong.jpg) no-repeat;
+    background: url(img/wukong.jpg) no-repeat;
     background-size: cover;
     font-family: Arial, sans-serif;
     position: relative;
