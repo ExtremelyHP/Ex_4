@@ -15,11 +15,70 @@
 			    justify-content: center;
 			    align-items: center;
 			    height: 100vh;
-			    background: url(img/wukong.jpg) no-repeat;
+			    background: url("img/wukong.jpg") no-repeat;
 			    background-size: cover;
 			    font-family: Arial, sans-serif;
 			    position: relative;
 			}
+/* 新增的动画区域样式 */
+.animation-container {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between; /* 使两个盒子分别位于左右两侧 */
+    align-items: center; /* 垂直居中 */
+    width: 100%; /* 占满整个宽度 */
+}
+
+.animated-box {
+    position: relative;
+    width: 300px; /* 图片宽度 */
+    height: 200px; /* 图片高度 */
+    overflow: hidden; /* 隐藏超出容器的内容 */
+    cursor: pointer;
+}
+
+.animated-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 使图片适应容器大小 */
+    transition: transform 0.3s ease-in-out; /* 添加图片缩放过渡效果 */
+}
+
+.animated-box:hover img {
+    transform: scale(1.1); /* 鼠标悬停时放大图片 */
+}
+
+.overlay-text {
+    position: absolute;
+    left: -100%; /* 初始状态下文字位于图片左侧外部 */
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* 黑色半透明背景 */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    transition: left 0.3s ease-in-out; /* 文字进入和退出的过渡效果 */
+}
+
+.animated-box:hover .overlay-text {
+    left: 0; /* 鼠标悬停时文字从左侧滑入 */
+}
+
+.left-box {
+    margin-left: 0; /* 确保左边的盒子靠左对齐 */
+}
+
+.right-box {
+    margin-right: 0; /* 确保右边的盒子靠右对齐 */
+}
+
 			#change-bg-btn, #play-music-btn {
 			    position: absolute;
 			    top: 10px; 
@@ -157,11 +216,61 @@
 			    border: 1px solid rgba(248, 108, 76, 0.8);
 			    background: rgba(248, 108, 76, 0.8);
 			}
+/* 滚动文字容器样式 */
+.scrolling-text-container {
+    position: relative;
+    width: 100%; /* 宽度横跨整个屏幕 */
+    height: 60px; /* 高度为100px */
+    background-color: rgba(0, 0, 0, 0); /* 半透明黑色背景 */
+    color: yellow; /* 字体颜色为黄色 */
+    overflow: hidden; /* 隐藏超出容器的内容 */
+    top: -160px; /* 紧贴在按钮下方5px */
+}
+
+/* 滚动文字样式 */
+.scrolling-text {
+    position: absolute;
+    white-space: nowrap; /* 防止文字换行 */
+    padding-left: 100%; /* 初始状态下文字位于容器外部右侧 */
+    animation: scrollText 20s linear infinite; /* 使用@keyframes定义的动画 */
+    line-height: 100px; /* 使文字垂直居中 */
+    font-size: 24px; /* 调整字体大小以适应新的高度 */
+}
+
+/* 定义滚动动画 */
+@keyframes scrollText {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
 		</style>
 	</head>
 	<body>
+    <!-- 新增的动画区域 -->
+    <div class="animation-container">
+        <div class="animated-box left-box">
+            <img src="sun_wu_kong.jpg" alt="人物1" />
+            <div class="overlay-text">失去六根的大圣残躯化作一块奇石，落在花果山巅，成为猴子猴孙口耳相传的传奇。玩家扮演的“天命人”就是猴子猴孙中的一员，为了集齐大圣的六根复活孙悟空，踏上一条充满危险与机遇的西游之路。</div>
+        </div>
+        <div class="animated-box right-box">
+            <img src="zhu_ba_jie.jpg" alt="人物2" />
+            <div class="overlay-text">猪八戒会在第四回章和天命人一起探索盘丝洞,猪八戒的主要技能包括钉耙冲击波、化身小旋风、钉耙连击，攻击时会转换成各种形态。</div>
+        </div>
+    </div>
+
 		<button id="change-bg-btn" type="button">切换背景</button> <!-- 新增的按钮 -->
 		<button id="play-music-btn" type="button">播放音乐</button> <!-- 新增的音乐播放按钮 -->
+		<!-- 新增的滚动文字区域 -->
+		<div class="scrolling-text-container">
+    		<div class="scrolling-text">
+        		《黑神话：悟空》是一款以中国神话为背景的动作角色扮演游戏。故事取材于中国古典小说“四大名著”之一的《西游记》。玩家将扮演一位“天命人”，为了探寻昔日传说的真相，踏上一条充满危险与惊奇的西游之路。天命人将前往多个引人入胜又风格迥异的西游故地，再次谱写前所未见的冒险史诗。西行的旅途并非只有风光旖旎，天命人还将遭遇许多强大的敌人与可敬的对手，与他们豪快战斗，至死方休
+    		</div>
+		</div>
+
 		<div class="box">
 		    <h2>Register</h2>
 		    <div class="input-box">
