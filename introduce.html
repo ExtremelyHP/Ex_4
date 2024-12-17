@@ -5,102 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introduce</title>
     <style>
+        /* 现有样式 */
         .body {
             overflow: hidden;
             width: 100%;   
         }
-        .section2 {
+        .section {
             height: 100vh;
             background-position: center;
             background-size: cover;
             position: relative;
             color: white; /* 文字颜色设为白色 */
             font-family: '楷体'; /* 设置字体为楷体 */
-			background-image: url(img/wukong2.jpg);
         }
-		.section {
-		    height: 100vh;
-		    background-position: center;
-		    background-size: cover;
-		    position: relative;
-		    color: white; /* 文字颜色设为白色 */
-		    font-family: '楷体'; /* 设置字体为楷体 */
-			background-image: url(img/wukong1.jpg);
-		}
         .text-container {
-            position: absolute;
-            top: 300px; /* 调整顶部距离，使文字更靠近视频 */
-            left: 100px; /* 调整左边距离 */
-            width: 300px; /* 宽度与视频容器相同 */
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        transform: translateY(-50%);
+        text-align: center;
+        opacity: 0;
+        will-change: transform, opacity; /* 提前通知浏览器 */
+        animation: fadeInUp 1.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; /* 更平滑的曲线 */
         }
+
         .title {
-            font-size: 2.5em; /* 增大标题字体大小 */
-            margin-bottom: 10px; /* 添加一些间距 */
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        opacity: 0;
+        will-change: transform, opacity; /* 提前通知浏览器 */
+        animation: slideInDown 1.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; /* 更平滑的曲线 */
+        animation-delay: 0.6s; /* 减少延迟，加快显示 */
         }
+
         .description {
-            font-size: 1.5em; /* 增大描述文字字体大小 */
-            margin-bottom: 5px; /* 添加一些间距 */
+        font-size: 1.5em;
+        margin-bottom: 5px;
+        opacity: 0;
+        will-change: opacity; /* 提前通知浏览器 */
+        animation: fadeIn 1.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; /* 更平滑的曲线 */
+        animation-delay: 1.2s; /* 减少延迟，加快显示 */
         }
         .highlight {
-            color: red; /* 高亮文字颜色 */
+            color: red;
         }
-        .video-container {
-            position: absolute;
-            bottom: 50px; 
-            left: 100px; 
-            width: 300px; 
-            height: 200px; 
+
+        /* 动画关键帧 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="section">
+    <!-- 第一部分 -->
+    <div class="section" style="background-image: url('img/wukong1.jpg')">
         <div class="text-container">
             <div class="title">关卡多端</div>
             <div class="description">雄奇壮丽，<span class="highlight">光怪陆离</span></div>
             <div class="description">重走<span class="highlight">西游</span>故地，再写神话结局</div>
         </div>
-        <div class="video-container">
-            <video controls autoplay muted>
-                <source src="img/wukong1.mp4" type="video/mp4">
-                您的浏览器不支持 video 标签。
-            </video>
-        </div>
     </div>
-    <div class="section2">
+    <!-- 第二部分 -->
+    <div class="section" style="background-image: url('img/wukong2.jpg')">
         <div class="text-container">
             <div class="title">妖王凶猛</div>
             <div class="description">妖魔<span class="highlight">鬼怪</span>，卷土重来</div>
             <div class="description">直面罕见<span class="highlight">强敌</span>，对阵昔日传奇</div>
         </div>
-        <div class="video-container">
-            <video controls autoplay muted>
-                <source src="img/heishenhua.mp4" type="video/mp4">
-                您的浏览器不支持 video 标签。
-            </video>
+    </div>
+    <!-- 第三部分 -->
+    <div class="section" style="background-image: url('img/wukong3.jpg')">
+        <div class="text-container">
+            <div class="title">变化无穷</div>
+            <div class="description">地动山摇，<span class="highlight">各显神通</span></div>
+            <div class="description">自由搭配<span class="highlight">法术</span>，随心构筑天赋</div>
         </div>
     </div>
-
-    <script>
-        const videos = document.querySelectorAll('video');
-        videos.forEach(video => {
-            video.addEventListener('click', () => {
-                if (video.requestFullscreen) {
-                    video.requestFullscreen();
-                } else if (video.mozRequestFullScreen) { // Firefox
-                    video.mozRequestFullScreen();
-                } else if (video.webkitRequestFullscreen) { // Chrome, Safari and Opera
-                    video.webkitRequestFullscreen();
-                } else if (video.msRequestFullscreen) { // IE/Edge
-                    video.msRequestFullscreen();
-                }
-            });
-        });
-    </script>
+    <!-- 第四部分 -->
+    <div class="section" style="background-image: url('img/wukong4.jpg')">
+        <div class="text-container">
+            <div class="title">故事新编</div>
+            <div class="description">千形万象，<span class="highlight">荡气回肠</span></div>
+            <div class="description">了解他们的<span class="highlight">爱与恨、贪与嗔</span>、前世与今生</div>
+        </div>
+    </div>
 </body>
 </html>
