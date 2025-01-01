@@ -6,6 +6,26 @@
     <title>Login</title>
     <link rel="stylesheet" href="style.css"/>
     <style>
+        /* 保持原有样式 */
+        @charset "utf-8";
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url(wukong.jpg) no-repeat;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+
         .intro-link {
             position: absolute;
             top: 60px; 
@@ -13,7 +33,7 @@
             color: gray; 
             text-decoration: none;
             font-size: 16px; 
-            transition: color 0.¾s ease; 
+            transition: color 0.75s ease; 
         }
 
         .intro-link:hover {
@@ -51,6 +71,144 @@
                 transform: translateX(100%);
             }
         }
+
+        #change-bg-btn, #play-music-btn {
+            position: absolute;
+            top: 10px; 
+            padding: 0.25em 0.75em; 
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(50, 50, 50, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #change-bg-btn {
+            right: 100px; 
+        }
+
+        #play-music-btn {
+            right: 10px; 
+        }
+
+        #change-bg-btn:hover, #play-music-btn:hover {
+            background: rgba(248, 108, 76, 0.8);
+            border-color: rgba(248, 108, 76, 0.8);
+        }
+
+        .box {
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 350px;
+            height: 380px;
+            border: 1px solid rgba(255,255,255,0.5);
+            backdrop-filter: blur(10px);
+            background: rgba(50,50,50,0.2);
+        }
+
+        h2 {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 20px;
+        }
+
+        .box .input-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+
+        .box .input-box > label {
+            margin-bottom: 5px;
+            color: rgba(255,255,255,0.9);
+            font-size: 13px;
+        }
+
+        .box .input-box > input {
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+            height: 35px;
+            width: 250px;
+            background: rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+
+        .box .bin-box {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+        }
+
+        .box .bin-box > a {
+            font-size: 14px;
+            width: 240px;
+            text-decoration: none;
+            color: rgba(255,255,255,0.9);
+            transition: 0.2s;
+            text-align: end;
+        }
+
+        .box .bin-box > a:hover {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .box .action-buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .box .action-buttons > button {
+            width: 120px;
+            height: 35px;
+            border: 1px solid rgba(197, 81, 58, 0.8);
+            background: rgba(197, 81, 58, 0.5);
+            color: rgba(255,255,255,0.9);
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+
+        .box .action-buttons > button:not(:last-child) {
+            margin-right: 10px;
+        }
+
+        .box .action-buttons > button:hover {
+            border: 1px solid rgba(248, 108, 76, 0.8);
+            background: rgba(248, 108, 76, 0.8);
+        }
+
+        .box .action-buttons .register-button {
+            display: inline-block;
+            width: 120px;
+            height: 35px;
+        }
+
+        .box .action-buttons .register-button button {
+            width: 100%;
+            height: 100%;
+            border: 1px solid rgba(197, 81, 58, 0.8);
+            background: rgba(197, 81, 58, 0.5);
+            color: rgba(255,255,255,0.9);
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+
+        .box .action-buttons .register-button button:hover {
+            border: 1px solid rgba(248, 108, 76, 0.8);
+            background: rgba(248, 108, 76, 0.8);
+        }
     </style>
 </head>
 <body>
@@ -76,17 +234,64 @@
             </a>
         </div>
     </div>
-     <!-- 新增：滚动文字容器 -->
-     <div class="scrolling-text-container">
+
+    <!-- 新增：滚动文字容器 -->
+    <div class="scrolling-text-container">
         <div class="scrolling-text">2024年8月20日,黑神话悟空正式登陆PC、PS5平台!</div>
     </div>
 
-    <script>
-        document.getElementById('introLink').addEventListener('click', function() {
-            this.style.color = 'white'; // 点击后变白
-        });
+    <!-- 按钮 -->
+    <button id="change-bg-btn">切换背景</button>
+    <button id="play-music-btn">播放音乐</button>
 
-      
+    <!-- jQuery库 -->
+    <script src="jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 点击“产品介绍”链接时改变颜色
+            $('#introLink').on('click', function(event) {
+                event.preventDefault(); // 阻止默认行为
+                $(this).css('color', 'white'); // 点击后变白
+                window.location.href = $(this).attr('href'); // 手动跳转到目标页面
+            });
+
+            // 定义背景图片数组
+            var backgrounds = [
+                'url("wukong1.jpg")',
+                'url("wukong2.jpg")',
+                'url("wukong3.jpg")',
+                'url("wukong4.jpg")',
+                'url("wukong.jpg")'
+            ];
+
+            // 当前背景图片索引
+            var currentIndex = 0;
+
+            // 切换背景按钮
+            $('#change-bg-btn').on('click', function() {
+                // 更新索引，循环切换背景图片
+                currentIndex = (currentIndex + 1) % backgrounds.length;
+                $('body').css('background-image', backgrounds[currentIndex]);
+            });
+
+            // 播放音乐按钮
+            $('#play-music-btn').on('click', function() {
+                if ($(this).data('playing')) {
+                    $(this).html('播放音乐');
+                    $(this).data('playing', false);
+                    // 停止音乐（假设有一个音频元素）
+                    $('#music')[0].pause();
+                } else {
+                    $(this).html('停止音乐');
+                    $(this).data('playing', true);
+                    // 播放音乐（假设有一个音频元素）
+                    $('#music')[0].play();
+                }
+            });
+
+            // 添加隐藏的音频元素
+            $('body').append('<audio id="music" src="yinyue.mp3" loop></audio>');
+        });
     </script>
 </body>
 </html>
