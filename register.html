@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<meta charset="utf-8">
 		<title></title>
 		<style>
@@ -15,7 +16,7 @@
 			    justify-content: center;
 			    align-items: center;
 			    height: 100vh;
-			    background: url("img/wukong.jpg") no-repeat;
+			    background: url(img/wukong.jpg) no-repeat;
 			    background-size: cover;
 			    font-family: Arial, sans-serif;
 			    position: relative;
@@ -293,6 +294,11 @@
 		        
 		    </div>
 		</div>
+
+
+
+
+		<div id="current-time" style="position: absolute; bottom: 10px; left: 10px; font-size: 20px; color: white;"></div>
 		<script>
 		    document.addEventListener("DOMContentLoaded", function() {
 		        const changeBgButton = document.getElementById('change-bg-btn');
@@ -326,6 +332,22 @@
 		            }
 		        });
 		    });
+$(document).ready(function() {
+    function updateTime() {
+        var now = new Date();
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+        var seconds = now.getSeconds().toString().padStart(2, '0');
+        var currentTimeString = `${hours}:${minutes}:${seconds}`;
+        $('#current-time').text(`当前时间: ${currentTimeString}`);
+    }
+
+    // 初始调用
+    updateTime();
+
+    // 每隔1秒更新时间
+    setInterval(updateTime, 1000);
+});
 		</script>
 	</body>
 </html>
