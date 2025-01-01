@@ -6,7 +6,7 @@
     <title>Introduce</title>
     <style>
         /* 现有样式 */
-        .body {
+        body {
             overflow: hidden;
             width: 100%;   
         }
@@ -17,34 +17,39 @@
             position: relative;
             color: white; /* 文字颜色设为白色 */
             font-family: '楷体'; /* 设置字体为楷体 */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .section.active {
+            opacity: 1;
         }
         .text-container {
-        position: absolute;
-        top: 50%;
-        left: 20px;
-        transform: translateY(-50%);
-        text-align: center;
-        opacity: 0;
-        will-change: transform, opacity; /* 提前通知浏览器 */
-        animation: fadeInUp 1.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; /* 更平滑的曲线 */
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            text-align: center;
+            opacity: 0;
+            will-change: transform, opacity; /* 提前通知浏览器 */
+            animation: fadeInUp 1.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; /* 更平滑的曲线 */
         }
 
         .title {
-        font-size: 2.5em;
-        margin-bottom: 10px;
-        opacity: 0;
-        will-change: transform, opacity; /* 提前通知浏览器 */
-        animation: slideInDown 1.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; /* 更平滑的曲线 */
-        animation-delay: 0.6s; /* 减少延迟，加快显示 */
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            opacity: 0;
+            will-change: transform, opacity; /* 提前通知浏览器 */
+            animation: slideInDown 1.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; /* 更平滑的曲线 */
+            animation-delay: 0.6s; /* 减少延迟，加快显示 */
         }
 
         .description {
-        font-size: 1.5em;
-        margin-bottom: 5px;
-        opacity: 0;
-        will-change: opacity; /* 提前通知浏览器 */
-        animation: fadeIn 1.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; /* 更平滑的曲线 */
-        animation-delay: 1.2s; /* 减少延迟，加快显示 */
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            opacity: 0;
+            will-change: opacity; /* 提前通知浏览器 */
+            animation: fadeIn 1.8s cubic-bezier(0.645, 0.045, 0.355, 1) forwards; /* 更平滑的曲线 */
+            animation-delay: 1.2s; /* 减少延迟，加快显示 */
         }
         .highlight {
             color: red;
@@ -67,7 +72,7 @@
 </head>
 <body>
     <!-- 第一部分 -->
-    <div class="section" style="background-image: url('img/wukong1.jpg')">
+    <div class="section active" data-bg-image="wukong1.jpg">
         <div class="text-container">
             <div class="title">关卡多端</div>
             <div class="description">雄奇壮丽，<span class="highlight">光怪陆离</span></div>
@@ -75,7 +80,7 @@
         </div>
     </div>
     <!-- 第二部分 -->
-    <div class="section" style="background-image: url('img/wukong2.jpg')">
+    <div class="section" data-bg-image="wukong2.jpg">
         <div class="text-container">
             <div class="title">妖王凶猛</div>
             <div class="description">妖魔<span class="highlight">鬼怪</span>，卷土重来</div>
@@ -83,7 +88,7 @@
         </div>
     </div>
     <!-- 第三部分 -->
-    <div class="section" style="background-image: url('img/wukong3.jpg')">
+    <div class="section" data-bg-image="wukong3.jpg">
         <div class="text-container">
             <div class="title">变化无穷</div>
             <div class="description">地动山摇，<span class="highlight">各显神通</span></div>
@@ -91,12 +96,73 @@
         </div>
     </div>
     <!-- 第四部分 -->
-    <div class="section" style="background-image: url('img/wukong4.jpg')">
+    <div class="section" data-bg-image="wukong4.jpg">
         <div class="text-container">
             <div class="title">故事新编</div>
             <div class="description">千形万象，<span class="highlight">荡气回肠</span></div>
             <div class="description">了解他们的<span class="highlight">爱与恨、贪与嗔</span>、前世与今生</div>
         </div>
     </div>
+
+    <!-- jQuery库 -->
+    <script src="jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 懒加载背景图片
+            function loadBgImages() {
+                $('.section').each(function() {
+                    if ($(this).offset().top < $(window).scrollTop() + $(window).height()) {
+                        var bgImage = $(this).data('bg-image');
+                        if (bgImage) {
+                            $(this).css('background-image', 'url(' + bgImage + ')')
+                                   .removeAttr('data-bg-image'); // 防止重复加载
+                        }
+                    }
+                });
+            }
+
+            // 监听滚动事件以触发懒加载
+            $(window).on('scroll', loadBgImages);
+            // 页面加载时立即加载可见区域内的图片
+            loadBgImages();
+
+            // 平滑滚动到锚点
+            $('a[href*="#"]').on('click', function(event) {
+                event.preventDefault();
+                var target = $($(this).attr('href'));
+                if (target.length) {
+                    $('html, body').animate({
+                        scrollTop: target.offset().top
+                    }, 500, 'swing');
+                }
+            });
+
+            // 自动播放幻灯片
+            var sections = $('.section');
+            var currentIndex = 0;
+
+            function showNextSection() {
+                currentIndex = (currentIndex + 1) % sections.length;
+                $('html, body').animate({
+                    scrollTop: $(sections[currentIndex]).offset().top
+                }, 500, 'swing', function() {
+                    sections.removeClass('active');
+                    $(sections[currentIndex]).addClass('active');
+                });
+            }
+
+            // 开始自动播放
+            var autoPlayInterval = setInterval(showNextSection, 5000); // 每5秒切换一次
+
+            // 如果需要暂停/恢复，可以添加按钮并绑定点击事件
+            $('#pause').on('click', function() {
+                clearInterval(autoPlayInterval);
+            });
+
+            $('#play').on('click', function() {
+                autoPlayInterval = setInterval(showNextSection, 5000); // 每5秒切换一次
+            });
+        });
+    </script>
 </body>
 </html>
