@@ -17,7 +17,7 @@ body
   align-items: center;
   min-height: 100vh;
   /*background: linear-gradient(45deg, #00bcd4, #ffeb3d);*/
-  background-image: url("../img/heifengshan.jpg");
+  background-image: url("../img/tu0.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -129,4 +129,23 @@ body
   -moz-user-select: none;    /* Firefox */
   -ms-user-select: none;     /* IE/Edge */
   user-select: none;         /* Standard syntax */
+}
+/* 设置按钮样式 */
+.bottom-center-button {
+  position: fixed; /* 使用固定定位 */
+  bottom: 20px; /* 距离页面底部20px */
+  left: 50%; /* 距离页面左侧50% */
+  transform: translateX(-50%); /* 向左移动自身宽度的50%，实现水平居中 */
+  padding: 10px 20px; /* 设置内边距 */
+  font-size: 16px; /* 设置字体大小 */
+  border: none; /* 移除边框 */
+  border-radius: 5px; /* 设置圆角 */
+  background-color: #009688; /* 设置背景颜色 */
+  color: white; /* 设置文字颜色 */
+  cursor: pointer; /* 设置鼠标指针为手形 */
+}
+
+/* 鼠标悬停时的样式 */
+.bottom-center-button:hover {
+  background-color: #00796b; /* 设置悬停时的背景颜色 */
 }
