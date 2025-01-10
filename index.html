@@ -254,6 +254,13 @@
                 $(this).css('color', 'white'); // 点击后变白
                 window.location.href = $(this).attr('href'); // 手动跳转到目标页面
             });
+			$('.action-buttons > button:first-child').on('click', function(event) {
+			
+			            event.preventDefault(); // 阻止默认提交行为
+			
+			            window.location.href = "main.html"; // 跳转到产品介绍页面
+			
+			            });
 
             // 定义背景图片数组
             var backgrounds = [
